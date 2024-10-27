@@ -1,0 +1,68 @@
+<!-- Mahnoors Code -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dormify - Homepage</title>
+    <!-- Bootstrap CSS and layout -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <h1 class="display-4">Dormify</h1>
+        <input type="text" class="form-control" placeholder="Search for products...">
+    </div>
+</header>
+
+<!-- Filters & Products Section -->
+<div class="container my-5">
+    <div class="row">
+        <!-- Sidebar Filters -->
+        <aside class="col-md-3">
+            <h3>Filters</h3>
+            <div>
+                <h5>Category</h5>
+                <div><input type="checkbox"> Furniture</div>
+                <div><input type="checkbox"> Clothing</div>
+                <div><input type="checkbox"> Tech</div>
+            </div>
+            <div>
+                <h5>Price Range</h5>
+                <div><input type="radio" name="price"> $0 - $50</div>
+                <div><input type="radio" name="price"> $50 - $100</div>
+                <div><input type="radio" name="price"> $100 - $200</div>
+            </div>
+        </aside>
+
+        <!-- Product Grid -->
+        <main class="col-md-9">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="product.html?product=mini-fridge">
+                        <div class="card">
+                            <img src="images/mini-fridge.jpg" class="card-img-top" alt="Mini Fridge">
+                            <div class="card-body">
+                                <h5 class="card-title">Mini Fridge</h5>
+                                <p class="card-text">$50</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- Repeat for other products -->
+            </div>
+        </main>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white p-3 text-center">
+    &copy; 2024 Dormify. All rights reserved.
+</footer>
+
+</body>
+</html>
