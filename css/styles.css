@@ -1,0 +1,18 @@
+/* Basic styles to enhance appearance */
+header, footer {
+    background-color: #333;
+    color: #fff;
+}
+
+.card {
+    margin-bottom: 1em;
+}
+
+.card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+footer {
+    padding: 1em 0;
+}
