@@ -75,16 +75,21 @@ cur.execute('''CREATE TABLE IF NOT EXISTS Payment (
     date DATE
 )''')
 
+cur.execute('''CREATE TABLE IF NOT EXISTS Images (
+    image_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    name VARCHAR(255),
+    image_Data BLOB
+)''')
 
 #Test Table creation by calling a value from the customer table
-print("Table created successfully")
-res = cur.execute("SELECT user_ID FROM customer")
-print(res.fetchall())
-#Creates a row with values for further testing
-cur.execute('''INSERT INTO Customer (user_Name, email, password) VALUES
-  ('GAEL', 'SIFUENTESGAEL2003@GMAIL.COM', 'TEEHEETOOHOO')
-''')
-#Calls rows with appropriate values.
-res = cur.execute("SELECT user_ID, user_NAME, email, password FROM customer WHERE user_NAME = 'GAEL'")
-print(res.fetchall())
+# print("Table created successfully")
+# res = cur.execute("SELECT user_ID FROM customer")
+# print(res.fetchall())
+# #Creates a row with values for further testing
+# cur.execute('''INSERT INTO Customer (user_Name, email, password) VALUES
+#   ('GAEL', 'SIFUENTESGAEL2003@GMAIL.COM', 'TEEHEETOOHOO')
+# ''')
+# #Calls rows with appropriate values.
+# res = cur.execute("SELECT user_ID, user_NAME, email, password FROM customer WHERE user_NAME = 'GAEL'")
+# print(res.fetchall())
 conn.close()
