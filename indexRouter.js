@@ -1,7 +1,25 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 
+const bcrypt = require('bcrypt');
+
 const router = express.Router();
+
+const multer = require('multer');
+const path = require('path');
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, '../uploads')); // Adjust path as needed
+    },
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, `${uniqueSuffix}-${file.originalname}`);
+    }
+});
+
+const upload = multer({ storage: storage });
+
+
 
 // Middleware for centralized error handling
 router.use((err, req, res, next) => {
@@ -25,29 +43,67 @@ router.get('/', (req, res) => {
 });
 
 
-//user route
-router.post("/create_user", (req, res) => {
+//create user route
+router.post("/create_user", async (req, res) => {
     const { username, email, password } = req.body.user;
 
     if (!username || !email || !password) {
         return res.status(400).json({ error: "Username, email, and password are required." });
     }
 
-    const sql = `INSERT INTO Customer (user_Name, email, password) VALUES (?, ?, ?)`;
-    const params = [username, email, password];
+    try{
+        const hashedPassword = await bcrypt.hash(password, 10);
 
-    db.run(sql, params, function(err) {
-        if (err) {
-            res.status(400).json({ error: err.message });
-            return;
-        }
-        res.json({
-            loggedIn: true,
-            status: "User created successfully!",
-            userId: this.lastID // Returns the ID of the new user
+        const sql = `INSERT INTO Customer (user_Name, email, password) VALUES (?, ?, ?)`;
+        const params = [username, email, hashedPassword];
+
+        db.run(sql, params, function(err) {
+            if (err) {
+                res.status(400).json({ error: err.message });
+                return;
+            }
+            res.json({
+                loggedIn: true,
+                status: "User created successfully!",
+                userId: this.lastID // Returns the ID of the new user
         });
     });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
 });
+
+//login route
+router.post('/login', async (req, res) => {
+    const { username, email, password } = req.body.user;
+
+    if (!username || !email || !password) {
+        return res.status(400).json({ error: "Username, email, and password are required." });
+    }
+
+    const sql = `SELECT password FROM Customer WHERE user_Name = ?`;
+    db.get(sql, [username], async (err, row) => {
+        if (err) {
+            return res.status(400).json({ error: err.message });
+        }
+        if (!row) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        try {
+            // Compare the provided password with the hashed password
+            const match = await bcrypt.compare(password, row.password);
+            if (match) {
+                res.json({ message: 'Login successful' });
+            } else {
+                res.status(401).json({ error: 'Invalid credentials' });
+            }
+        } catch (error) {
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    });
+});
+
 
 //get all users route
 router.get("/users", (_, res) => {
@@ -135,37 +191,26 @@ router.put("/users/:userId", (req, res) => {
     });
 });
 
-
-//Retrieve products from the Product table and send them as a response.
-router.get('/products', (req, res) => {
-    db.all("SELECT * FROM Product", [], (err, rows) => {
-        if (err) {
-            res.status(400).json({ error: err.message });
-            return;
-        }
-        res.json(rows);
-    });
-});
-
-//add product route
-router.post('/products', (req, res) => {
+// Create a product with an image
+router.post('/products', upload.single('image'), (req, res) => {
     const { name, price, description, volume, weight } = req.body;
+    const imageUrl = req.file ? `/images/${req.file.filename}` : null; // Save the relative file path
 
-    if (!name || !price || !description || !volume || !weight) {
-        return res.status(400).json({ error: "All fields are required" });
+    if (!name || !price || !description || !volume || !weight || !imageUrl) {
+        return res.status(400).json({ error: 'All fields, including an image, are required' });
     }
 
     const sql = `
-        INSERT INTO Product (name, price, description, volume, weight) 
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO Product (name, price, description, volume, weight, image_url)
+        VALUES (?, ?, ?, ?, ?, ?)
     `;
-    const params = [name, price, description, volume, weight];
+    const params = [name, price, description, volume, weight, imageUrl];
 
     db.run(sql, params, function (err) {
         if (err) {
             return res.status(400).json({ error: err.message });
         }
-        res.json({ status: "Product added successfully", productId: this.lastID });
+        res.json({ message: 'Product added successfully', product_ID: this.lastID });
     });
 });
 
@@ -526,10 +571,64 @@ router.get('/products/search', (req, res) => {
 });
 
 
+/****  IMAGES  *****/
 
-module.exports = router;
+// Update product image URL
+router.put('/products/:id/image', (req, res) => {
+    const { id } = req.params; // Capture product ID from the URL
+    const { image_url } = req.body; // Get the new image URL from the request body
 
+    if (!image_url) {
+        return res.status(400).json({ error: "Image URL is required" });
+    }
 
+    const sql = `UPDATE Product SET image_url = ? WHERE product_ID = ?`;
+    const params = [image_url, id];
+
+    db.run(sql, params, function (err) {
+        if (err) {
+            return res.status(400).json({ error: err.message });
+        }
+
+        if (this.changes === 0) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        res.json({ message: "Product image updated successfully" });
+    });
+});
+
+//get all products
+router.get('/products', (req, res) => {
+    const sql = `SELECT product_ID, name, price, description, volume, weight, image_url FROM Product`;
+
+    db.all(sql, [], (err, rows) => {
+        if (err) {
+            return res.status(400).json({ error: err.message });
+        }
+
+        res.json(rows);
+    });
+});
+
+//get product by ID
+router.get('/products/:id', (req, res) => {
+    const { id } = req.params;
+
+    const sql = `SELECT product_ID, name, price, description, volume, weight, image_url FROM Product WHERE product_ID = ?`;
+
+    db.get(sql, [id], (err, row) => {
+        if (err) {
+            return res.status(400).json({ error: err.message });
+        }
+
+        if (!row) {
+            return res.status(404).json({ message: "Product not found" });
+        }
+
+        res.json(row);
+    });
+});
 
 
 
