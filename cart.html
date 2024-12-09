@@ -4,131 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dormify - Cart</title>
+    <title>Dormify - Product Details</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
 <header class="p-3 bg-dark text-white text-center">
-    <h1>Your Cart</h1>
+    <h1 id="product-name">Product Name</h1>
 </header>
 
 <div class="container my-5">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Total</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="cart-items">
-            <!-- Cart items go here, dynamically populated by JavaScript -->
-        </tbody>
-    </table>
-    <div id="cart-total" class="d-flex justify-content-between">
-        <strong>Total: $0</strong>
+    <div class="row">
+        <div class="col-md-6">
+            <img id="product-image" src="#" class="img-fluid" alt="Product Image">
+        </div>
+        <div class="col-md-6">
+            <p id="product-description">Product description goes here.</p>
+            <p id="product-price">Price: $0</p>
+            <button class="btn btn-primary">Add to Cart</button>
+        </div>
     </div>
-    <button class="btn btn-success mt-3" id="checkout-button">Proceed to Checkout</button>
 </div>
 
 <footer class="bg-dark text-white text-center p-3">
     &copy; 2024 Dormify. All rights reserved.
 </footer>
 
-<script>
-// Function to update the cart display
-function updateCart() {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    let cartItemsContainer = document.getElementById('cart-items');
-    let cartTotal = 0;
-
-    // Clear existing cart items
-    cartItemsContainer.innerHTML = '';
-
-    // Loop through cart items and add them to the table
-    cart.forEach(item => {
-        // Fetch product details dynamically from the API
-        fetch(`http://localhost:5000/api/products/${item.name}`) // Adjust API URL as necessary
-            .then(response => response.json())
-            .then(product => {
-                // Ensure price is a number
-                let itemPrice = parseFloat(product.price.replace('$', ''));
-                let itemTotal = itemPrice * item.quantity;
-
-                let row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${product.name}</td>
-                    <td><input type="number" class="form-control" value="${item.quantity}" min="1" data-product="${product.name}" onchange="updateItemQuantity(event)"></td>
-                    <td>$${itemPrice.toFixed(2)}</td>
-                    <td>$${itemTotal.toFixed(2)}</td>
-                    <td><button class="btn btn-danger btn-sm" onclick="removeItemFromCart('${product.name}')">Remove</button></td>
-                `;
-                cartItemsContainer.appendChild(row);
-                cartTotal += itemTotal;
-
-                // Update the total once the loop is complete
-                document.getElementById('cart-total').innerHTML = `<strong>Total: $${cartTotal.toFixed(2)}</strong>`;
-            })
-            .catch(error => {
-                console.error('Error fetching product details:', error);
-            });
-    });
-}
-
-// Function to update the quantity of a cart item
-function updateItemQuantity(event) {
-    let productName = event.target.getAttribute('data-product');
-    let newQuantity = parseInt(event.target.value, 10);
-
-    // Ensure the new quantity is a valid number
-    if (isNaN(newQuantity) || newQuantity < 1) {
-        newQuantity = 1;
-    }
-
-    // Retrieve current cart data
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    // Find the product and update its quantity
-    cart.forEach(item => {
-        if (item.name === productName) {
-            item.quantity = newQuantity;
-        }
-    });
-
-    // Save the updated cart back to localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-
-    // Update the cart display
-    updateCart();
-}
-
-// Function to remove an item from the cart
-function removeItemFromCart(productName) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-    // Filter out the product from the cart
-    cart = cart.filter(item => item.name !== productName);
-
-    // Save the updated cart back to localStorage
-    localStorage.setItem('cart', JSON.stringify(cart));
-
-    // Update the cart display
-    updateCart();
-}
-
-// Function to handle checkout (just a placeholder)
-document.getElementById('checkout-button').addEventListener('click', () => {
-    alert('Proceeding to checkout...');
-    // Redirect to checkout page or show a checkout modal
-});
-
-// Initialize the cart on page load
-updateCart();
-</script>
-
+<script src="js/product.js"></script>
 </body>
-</html>
+</html> 
