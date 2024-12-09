@@ -51,18 +51,24 @@ function updateCart() {
 
     // Loop through cart items and add them to the table
     cart.forEach(item => {
-        if (item.price && item.quantity && !isNaN(item.price) && !isNaN(item.quantity)) {
-            let row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${item.name}</td>
-                <td><input type="number" class="form-control" value="${item.quantity}" min="1" data-product="${item.name}" onchange="updateItemQuantity(event)"></td>
-                <td>$${item.price}</td>
-                <td>$${(item.price * item.quantity).toFixed(2)}</td>
-                <td><button class="btn btn-danger btn-sm" onclick="removeFromCart('${item.name}')">Remove</button></td>
-            `;
-            cartItemsContainer.appendChild(row);
-            cartTotal += item.price * item.quantity;
+        let price = parseFloat(item.price);
+        let quantity = parseInt(item.quantity);
+
+        // Check if price and quantity are valid
+        if (isNaN(price) || isNaN(quantity)) {
+            return;  // Skip this item if price or quantity is invalid
         }
+
+        let row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td><input type="number" class="form-control" value="${item.quantity}" min="1" data-product="${item.name}" onchange="updateItemQuantity(event)"></td>
+            <td>$${price}</td>
+            <td>$${(price * quantity).toFixed(2)}</td>
+            <td><button class="btn btn-danger btn-sm" onclick="removeFromCart('${item.name}')">Remove</button></td>
+        `;
+        cartItemsContainer.appendChild(row);
+        cartTotal += price * quantity;
     });
 
     // Update the total
@@ -75,8 +81,7 @@ function updateItemQuantity(event) {
     let newQuantity = parseInt(event.target.value);
 
     // Validate and ensure quantity is a positive integer
-    if (newQuantity <= 0 || isNaN(newQuantity)) {
-        alert("Please enter a valid quantity.");
+    if (isNaN(newQuantity) || newQuantity <= 0) {
         event.target.value = 1; // Reset to 1 if invalid
         return;
     }
@@ -113,7 +118,7 @@ function removeFromCart(productName) {
     updateCart();
 }
 
-// Add product to the cart (for testing purposes, this could be added after selecting a product)
+// Add product to the cart 
 function addToCart(product) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -138,11 +143,10 @@ addToCart({name: 'Mini Fridge', price: 50, quantity: 1}); // Test product
 // Update the cart display when the page loads
 window.onload = updateCart;
 
-// Proceed to checkout page
-    function checkout() {
-    window.location.href = "checkout.html"; // Redirect to checkout page directly
+function checkout() {
+    // Redirect to the checkout page
+    window.location.href = "checkout.html";
 }
-
 </script>
 
 </body>
