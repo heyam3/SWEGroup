@@ -4,33 +4,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dormify - Product Details</title>
+    <title>Dormify - Cart</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
 <header class="p-3 bg-dark text-white text-center">
-    <h1 id="product-name">Product Name</h1>
+    <h1>Your Cart</h1>
 </header>
 
 <div class="container my-5">
-    <div class="row">
-        <div class="col-md-6">
-            <img id="product-image" src="#" class="img-fluid" alt="Product Image">
-        </div>
-        <div class="col-md-6">
-            <p id="product-description">Product description goes here.</p>
-            <p id="product-price">Price: $0</p>
-            <button class="btn btn-primary">Add to Cart</button>
-        </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody id="cart-items">
+            <!-- Cart items go here, dynamically populated by JavaScript -->
+        </tbody>
+    </table>
+    <div id="cart-total" class="d-flex justify-content-between">
+        <strong>Total: $0</strong>
     </div>
+    <button class="btn btn-success mt-3" id="checkout-button" onclick="checkout()">Proceed to Checkout</button>
 </div>
 
 <footer class="bg-dark text-white text-center p-3">
     &copy; 2024 Dormify. All rights reserved.
 </footer>
 
-<script src="js/product.js"></script>
+<script>
+// Function to update the cart display
+function updateCart() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cartItemsContainer = document.getElementById('cart-items');
+    let cartTotal = 0;
+
+    // Clear existing cart items
+    cartItemsContainer.innerHTML = '';
+
+    // Loop through cart items and add them to the table
+    cart.forEach(item => {
+        if (item.price && item.quantity && !isNaN(item.price) && !isNaN(item.quantity)) {
+            let row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${item.name}</td>
+                <td><input type="number" class="form-control" value="${item.quantity}" min="1" data-product="${item.name}" onchange="updateItemQuantity(event)"></td>
+                <td>$${item.price}</td>
+                <td>$${(item.price * item.quantity).toFixed(2)}</td>
+                <td><button class="btn btn-danger btn-sm" onclick="removeFromCart('${item.name}')">Remove</button></td>
+            `;
+            cartItemsContainer.appendChild(row);
+            cartTotal += item.price * item.quantity;
+        }
+    });
+
+    // Update the total
+    document.getElementById('cart-total').innerHTML = `<strong>Total: $${cartTotal.toFixed(2)}</strong>`;
+}
+
+// Function to update the quantity of a cart item
+function updateItemQuantity(event) {
+    let productName = event.target.getAttribute('data-product');
+    let newQuantity = parseInt(event.target.value);
+
+    // Validate and ensure quantity is a positive integer
+    if (newQuantity <= 0 || isNaN(newQuantity)) {
+        alert("Please enter a valid quantity.");
+        event.target.value = 1; // Reset to 1 if invalid
+        return;
+    }
+
+    // Retrieve current cart data
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Find the product and update its quantity
+    cart.forEach(item => {
+        if (item.name === productName) {
+            item.quantity = newQuantity;
+        }
+    });
+
+    // Save the updated cart back to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Update the cart display
+    updateCart();
+}
+
+// Function to remove an item from the cart
+function removeFromCart(productName) {
+    // Retrieve current cart data
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Remove the product from the cart
+    cart = cart.filter(item => item.name !== productName);
+
+    // Save the updated cart back to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Update the cart display
+    updateCart();
+}
+
+// Add product to the cart (for testing purposes, this could be added after selecting a product)
+function addToCart(product) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Check if the product already exists in the cart
+    let existingProduct = cart.find(item => item.name === product.name);
+    if (existingProduct) {
+        existingProduct.quantity += 1;
+    } else {
+        cart.push(product);
+    }
+
+    // Save the updated cart back to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Update the cart display
+    updateCart();
+}
+
+// Example: Add a product to the cart (this can be triggered by a button on the product page)
+addToCart({name: 'Mini Fridge', price: 50, quantity: 1}); // Test product
+
+// Update the cart display when the page loads
+window.onload = updateCart;
+
+// Proceed to checkout page
+    function checkout() {
+    window.location.href = "checkout.html"; // Redirect to checkout page directly
+}
+
+</script>
+
 </body>
-</html> 
+</html>
