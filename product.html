@@ -32,8 +32,6 @@
 </footer>
 
 <script>
-// JavaScript to get the product data from the URL and display it
-
 // Function to get URL parameters
 function getUrlParameter(name) {
     var url = window.location.search;
@@ -41,173 +39,69 @@ function getUrlParameter(name) {
     var results = regex.exec(url);
     return results ? decodeURIComponent(results[1]) : null;
 }
-    
-    // Get the product name from the URL
-    const productName = getUrlParameter('product');
-    
-    // Define product details based on product name
-    const products = {
-        "mini-fridge": {
-            name: "Mini Fridge",
-            description: "A compact fridge perfect for your dorm room.",
-            price: "$50",
-            image: "istockphoto-1349945919-612x612.jpg"
-        },
-        "dresser": {
-            name: "Dresser",
-            description: "A stylish dresser to keep your clothes organized.",
-            price: "$120",
-            image: "istockphoto-1257583823-612x612.jpg"
-        },
-        "table": {
-            name: "Table",
-            description: "A sturdy table for studying or dining.",
-            price: "$90",
-            image: "istockphoto-1335437556-612x612.jpg"
-        },
-        "sofa": {
-            name: "Sofa",
-            description: "A comfortable sofa chair to relax on.",
-            price: "$200",
-            image: "istockphoto-1161389159-612x612.jpg"
-        },
-        "vanity": {
-            name: "Vanity",
-            description: "A chic vanity for your beauty essentials.",
-            price: "$150",
-            image: "istockphoto-1147066794-612x612.jpg"
-        },
-        "shoes": {
-            name: "Shoes",
-            description: "Comfortable and stylish shoes for all-day wear.",
-            price: "$40",
-            image: "istockphoto-1629114862-612x612.jpg"
-        },
-        "Coat": {
-            name: "Coat",
-            description: "A warm coat to keep you cozy during winter.",
-            price: "$35",
-            image: "istockphoto-629516832-612x612.jpg" // Add the image for coat
-        },
-        "Pillow": {
-            name: "Pillow",
-            description: "A soft pillow for a good night's sleep.",
-            price: "$10",
-            image: "istockphoto-1253882807-612x612.jpg" // Adjust if different pillow image
-        },
-        "ipad": {
-            name: "iPad",
-            description: "A sleek tablet for studying or entertainment.",
-            price: "$250",
-            image: "istockphoto-1129808327-612x612.jpg" // Add the image for ipad
-        },
-        "Pens": {
-            name: "Pens",
-            description: "A set of durable pens for all your writing needs.",
-            price: "$5",
-            image: "istockphoto-165981506-612x612.jpg" // Add the image for pens
-        },
-        "Rug": {
-            name: "Rug",
-            description: "A cozy rug to warm up your dorm room floor.",
-            price: "$25",
-            image: "istockphoto-1320633607-612x612.jpg" // Add the image for rug
-        },
-        "Curtains": {
-            name: "Curtains",
-            description: "Stylish curtains to give your room a cozy feel.",
-            price: "$15",
-            image: "istockphoto-1183928969-612x612.jpg" // Add the image for curtains
-        },
-        "Jeans": {
-            name: "Jeans",
-            description: "Comfortable jeans for everyday wear.",
-            price: "$50",
-            image: "istockphoto-1281304280-612x612.jpg" // Add the image for jeans
-        },
-        "Jacket": {
-            name: "Jacket",
-            description: "A versatile jacket to keep you warm and stylish.",
-            price: "$20",
-            image: "istockphoto-475570206-612x612.jpg" // Add the image for jacket
-        },
-        "Rackets": {
-            name: "Rackets",
-            description: "Perfect rackets for your next game of tennis or badminton.",
-            price: "$60",
-            image: "istockphoto-1171084311-612x612.jpg" // Add the image for rackets
-        },
-        "Heels": {
-            name: "Heels",
-            description: "Elegant heels for a night out or formal occasions.",
-            price: "$25",
-            image: "istockphoto-173943143-612x612.jpg" // Add the image for heels
-        },
-        "Scarf": {
-            name: "Scarf",
-            description: "A soft scarf to keep you warm in colder weather.",
-            price: "$3",
-            image: "istockphoto-1314193580-612x612.jpg" // Add the image for scarf
-        },
-        "Bat": {
-            name: "Bat",
-            description: "A sturdy bat for your next baseball game.",
-            price: "$30",
-            image: "istockphoto-176805940-612x612.jpg" // Add the image for bat
-        },
-        "Comforter": {
-            name: "Comforter",
-            description: "A cozy comforter to keep you warm and snug.",
-            price: "$10",
-            image: "istockphoto-536089355-612x612.jpg" // Add the image for comforter
-        },
-        "Purse": {
-            name: "Purse",
-            description: "A stylish purse to hold your essentials.",
-            price: "$24",
-            image: "istockphoto-952079442-612x612.jpg" // Add the image for purse
-        }
-    };
-    
-    // Display the product details
-    if (productName && products[productName]) {
-        const product = products[productName];
-        document.getElementById('product-name').innerText = product.name;
-        document.getElementById('product-image').src = product.image;
-        document.getElementById('product-image').alt = product.name;
-        document.getElementById('product-description').innerText = product.description;
-        document.getElementById('product-price').innerText = `Price: ${product.price}`;
-        
-        // Store the product details in a variable for later use in "Add to Cart"
-        window.currentProduct = product; // Store it globally for easy access
+
+// Fetch the product details from the API
+function fetchProductDetails(productName) {
+    fetch(`http://localhost:5000/api/products/${productName}`)  // Adjust API endpoint as needed
+        .then(response => response.json())
+        .then(product => {
+            if (product) {
+                document.getElementById('product-name').innerText = product.name;
+                document.getElementById('product-image').src = `http://localhost:5000/images/${product.image}`;  // Ensure correct image path
+                document.getElementById('product-image').alt = product.name;
+                document.getElementById('product-description').innerText = product.description;
+                document.getElementById('product-price').innerText = `Price: ${product.price}`;
+                
+                // Store the product details for later use in "Add to Cart"
+                window.currentProduct = product;
+            } else {
+                document.getElementById('product-name').innerText = 'Product Not Found';
+                document.getElementById('product-description').innerText = 'Sorry, we couldn\'t find the product you were looking for.';
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching product details:', error);
+            document.getElementById('product-name').innerText = 'Product Not Found';
+            document.getElementById('product-description').innerText = 'Error fetching product details.';
+        });
+}
+
+// Get product name from the URL
+const productName = getUrlParameter('product');
+
+// Fetch and display the product details
+if (productName) {
+    fetchProductDetails(productName);
+} else {
+    document.getElementById('product-name').innerText = 'Product Not Found';
+    document.getElementById('product-description').innerText = 'No product specified.';
+}
+
+// Function to add product to cart and redirect to cart page
+function addToCart() {
+    if (!window.currentProduct) {
+        alert('No product found');
+        return;
+    }
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Check if the product already exists in the cart
+    let existingProduct = cart.find(item => item.name === window.currentProduct.name);
+    if (existingProduct) {
+        existingProduct.quantity += 1;
     } else {
-        document.getElementById('product-name').innerText = 'Product Not Found';
-        document.getElementById('product-description').innerText = 'Sorry, we couldn\'t find the product you were looking for.';
+        // Add new product to the cart
+        cart.push({...window.currentProduct, quantity: 1});
     }
-    
-    // Function to add product to cart and redirect to cart page
-    function addToCart() {
-        if (!window.currentProduct) {
-            alert('No product found');
-            return;
-        }
-    
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    
-        // Check if the product already exists in the cart
-        let existingProduct = cart.find(item => item.name === window.currentProduct.name);
-        if (existingProduct) {
-            existingProduct.quantity += 1;
-        } else {
-            // Add new product to the cart
-            cart.push({...window.currentProduct, quantity: 1});
-        }
-    
-        // Save the updated cart back to localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-    
-        // Redirect to the cart page
-        window.location.href = "cart.html";  // Redirect to the cart page after adding the item
-    }
-    </script>
-    
+
+    // Save the updated cart back to localStorage
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    // Redirect to the cart page
+    window.location.href = "cart.html";  // Redirect to the cart page after adding the item
+}
+</script>
+
+</body>
+</html>
