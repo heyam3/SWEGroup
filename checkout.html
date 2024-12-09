@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dormify - Checkout</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<header class="p-3 bg-dark text-white text-center">
+    <h1>Checkout</h1>
+</header>
+
+<div class="container my-5">
+    <!-- Review Order -->
+    <h3>Review Your Order</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody id="cart-items">
+            <!-- Cart items will be dynamically populated here -->
+        </tbody>
+    </table>
+    <div id="cart-total" class="d-flex justify-content-between">
+        <strong>Total: $0</strong>
+    </div>
+
+    <!-- Shipping Information -->
+    <h3 class="mt-4">Shipping Information</h3>
+    <form id="shipping-form">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" class="form-control" id="name" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Shipping Address</label>
+            <input type="text" class="form-control" id="address" required>
+        </div>
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" class="form-control" id="phone" required>
+        </div>
+    </form>
+
+    <!-- Payment Information -->
+    <h3 class="mt-4">Payment Information</h3>
+    <form id="payment-form">
+        <div class="form-group">
+            <label for="card-number">Credit Card Number</label>
+            <input type="text" class="form-control" id="card-number" required>
+        </div>
+        <div class="form-group">
+            <label for="expiry-date">Expiration Date (MM/YY)</label>
+            <input type="text" class="form-control" id="expiry-date" required>
+        </div>
+        <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input type="text" class="form-control" id="cvv" required>
+        </div>
+    </form>
+
+    <!-- Checkout Button -->
+    <button class="btn btn-primary mt-4" id="checkout-button">Place Order</button>
+</div>
+
+<footer class="bg-dark text-white text-center p-3">
+    &copy; 2024 Dormify. All rights reserved.
+</footer>
+
+<script>
+// Function to update the order summary with cart items
+function updateOrderSummary() {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cartItemsContainer = document.getElementById('cart-items');
+    let cartTotal = 0;
+
+    // Clear existing cart items
+    cartItemsContainer.innerHTML = '';
+
+    // Loop through cart items and add them to the table
+    cart.forEach(item => {
+        // Fetch product details dynamically from the API
+        fetch(`http://localhost:5000/api/products/${item.name}`) // Adjust API URL as necessary
+            .then(response => response.json())
+            .then(product => {
+                let itemPrice = parseFloat(product.price.replace('$', ''));
+                let itemTotal = itemPrice * item.quantity;
+
+                let row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${product.name}</td>
+                    <td>${item.quantity}</td>
+                    <td>$${itemPrice.toFixed(2)}</td>
+                    <td>$${itemTotal.toFixed(2)}</td>
+                `;
+                cartItemsContainer.appendChild(row);
+                cartTotal += itemTotal;
+
+                // Update the total once the loop is complete
+                document.getElementById('cart-total').innerHTML = `<strong>Total: $${cartTotal.toFixed(2)}</strong>`;
+            })
+            .catch(error => {
+                console.error('Error fetching product details:', error);
+            });
+    });
+}
+
+// Handle the checkout button click
+document.getElementById('checkout-button').addEventListener('click', () => {
+    // Get shipping information
+    let name = document.getElementById('name').value;
+    let address = document.getElementById('address').value;
+    let phone = document.getElementById('phone').value;
+
+    // Get payment information
+    let cardNumber = document.getElementById('card-number').value;
+    let expiryDate = document.getElementById('expiry-date').value;
+    let cvv = document.getElementById('cvv').value;
+
+    // Simple validation check
+    if (!name || !address || !phone || !cardNumber || !expiryDate || !cvv) {
+        alert('Please fill in all fields');
+        return;
+    }
+
+    // Create the order object
+    let order = {
+        shipping: {
+            name: name,
+            address: address,
+            phone: phone
+        },
+        payment: {
+            cardNumber: cardNumber,
+            expiryDate: expiryDate,
+            cvv: cvv
+        },
+        items: JSON.parse(localStorage.getItem('cart'))
+    };
+
+    // Log the order (this could be sent to a backend or payment processor)
+    console.log('Order placed:', order);
+
+    // Optionally, clear the cart after placing the order
+    localStorage.removeItem('cart');
+    
+    // Directly redirect to the confirmation page
+    window.location.href = 'order-placed.html'; // Directly redirect to the confirmation page
+});
+
+// Initialize the order summary
+updateOrderSummary();
+</script>
+
+</body>
+</html>
