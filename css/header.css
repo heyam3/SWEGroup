@@ -304,3 +304,15 @@ body
         top: 18px;
     }
 }
+.add-product-btn {
+    font-size: 1.5em; /* Match size of other icons */
+    margin-right: 20px; /* Space between plus icon and shopping cart */
+    color: rgb(29, 29, 29); /* Match color of other icons */
+    display: flex;
+    align-items: center; /* Align vertically with other icons */
+    text-decoration: none; /* Remove underline */
+}
+
+.add-product-btn:hover {
+    color: rgb(60, 64, 67); /* Optional hover color */
+}
