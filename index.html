@@ -35,7 +35,7 @@ function fetchProducts() {
             // Loop through the products and dynamically create product cards
             products.forEach(product => {
                 const productCard = document.createElement('div');
-                productCard.classList.add('col-md-4', 'mb-4');
+                productCard.classList.add('col-12', 'col-sm-6', 'col-md-4', 'mb-4'); // Added col-12 and col-sm-6 for better responsiveness
                 productCard.innerHTML = `
                     <div class="card">
                         <img src="http://localhost:5000/images/${product.image}" class="card-img-top" alt="${product.name}">
@@ -59,3 +59,4 @@ window.onload = fetchProducts;
 
 </body>
 </html>
+
