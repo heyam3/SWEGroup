@@ -1,324 +1,61 @@
-<!-- Mahnoors Code -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dormify - Homepage</title>
-    <!-- Bootstrap CSS for responsiveness and layout -->
+    <title>Dormify - Home</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <!-- HEADER -->
-    <div id="header"></div>
-    <script>
-        function loadHeader() {
-            const req = new XMLHttpRequest();
-            req.open("GET", "header.html", false);
-            req.send(null);
-            document.getElementById("header").innerHTML = req.responseText;
-        }
-        loadHeader();
-    </script>
 
-    <!-- CONTENT -->
-    <div id="content"></div>
-    <script>
-        function loadContent() {
-            const req = new XMLHttpRequest();
-            req.open("GET", "content.html", false); 
-            req.send(null);
-            document.getElementById("content").innerHTML = req.responseText;
-        }
-        loadContent();
-    </script>
-
-<!-- Header -->
-<header class="p-3 bg-dark text-white">
-    <div class="container">
-        <h1 class="display-4">Dormify</h1>
-        
-        <!-- Search Form -->
-        <form action="/search" method="GET" class="d-flex">
-            <input type="text" class="form-control" placeholder="Search for products..." name="query" aria-label="Search for products...">
-            <button type="submit" class="btn btn-primary ml-2">Search</button>
-        </form>
-    </div>
+<header class="p-3 bg-dark text-white text-center">
+    <h1>Welcome to Dormify</h1>
 </header>
 
-
-<!-- Filters & Products Section -->
-<div class="container my-5">
-    <div class="row">
-        <!-- Sidebar Filters -->
-        <aside class="col-md-3">
-            <h3>Filters</h3>
-            <div>
-                <h5>Category</h5>
-                <div><input type="checkbox"> Furniture</div>
-                <div><input type="checkbox"> Clothing</div>
-                <div><input type="checkbox"> Tech</div>
-            </div>
-            <div>
-                <h5>Price Range</h5>
-                <div><input type="radio" name="price"> $0 - $50</div>
-                <div><input type="radio" name="price"> $50 - $100</div>
-                <div><input type="radio" name="price"> $100 - $200</div>
-            </div>
-        </aside>
-
-        <!-- Product Grid -->
-        <main class="col-md-9">
-            <div class="row">
-                <!-- Product 1: Mini Fridge -->
-                <div class="col-md-4">
-                    <a href="product.html?product=mini-fridge">
-                        <div class="card">
-                            <img src="istockphoto-1349945919-612x612.jpg" class="card-img-top" alt="Mini Fridge">
-                            <div class="card-body">
-                                <h5 class="card-title">Mini Fridge</h5>
-                                <p class="card-text">$50</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 2: Dresser -->
-                <div class="col-md-4">
-                    <a href="product.html?product=dresser">
-                        <div class="card">
-                            <img src="istockphoto-1257583823-612x612.jpg" class="card-img-top" alt="Dresser">
-                            <div class="card-body">
-                                <h5 class="card-title">Dresser</h5>
-                                <p class="card-text">$50</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 3: Table -->
-                <div class="col-md-4">
-                    <a href="product.html?product=table">
-                        <div class="card">
-                            <img src="istockphoto-1335437556-612x612.jpg" class="card-img-top" alt="Table">
-                            <div class="card-body">
-                                <h5 class="card-title">Table</h5>
-                                <p class="card-text">$90</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 4: Sofa -->
-                <div class="col-md-4">
-                    <a href="product.html?product=sofa">
-                        <div class="card">
-                            <img src="istockphoto-1161389159-612x612.jpg" class="card-img-top" alt="Sofa Chair">
-                            <div class="card-body">
-                                <h5 class="card-title">Sofa Chair</h5>
-                                <p class="card-text">$200</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 5: Vanity -->
-                <div class="col-md-4">
-                    <a href="product.html?product=vanity">
-                        <div class="card">
-                            <img src="istockphoto-1147066794-612x612.jpg" class="card-img-top" alt="Vanity">
-                            <div class="card-body">
-                                <h5 class="card-title">Vanity</h5>
-                                <p class="card-text">$150</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 6: Shoes -->
-                <div class="col-md-4">
-                    <a href="product.html?product=shoes">
-                        <div class="card">
-                            <img src="istockphoto-1629114862-612x612.jpg" class="card-img-top" alt="Shoes">
-                            
-                            <div class="card-body">
-                                <h5 class="card-title">Shoes</h5>
-                                <p class="card-text">$40</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 7:Coat -->
-                <div class="col-md-4">
-                    <a href="product.html?product=Coat">
-                        <div class="card">
-                            <img src="istockphoto-629516832-612x612.jpg" class="card-img-top" alt="Coat">
-                            <div class="card-body">
-                                <h5 class="card-title">Coat</h5>
-                                <p class="card-text">$35</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 8 Pillow: -->
-                <div class="col-md-4">
-                    <a href="product.html?product=Pillow">
-                        <div class="card">
-                            <img src="istockphoto-1253882807-612x612.jpg" class="card-img-top" alt="Pillow">
-                            <div class="card-body">
-                                <h5 class="card-title">Pillow</h5>
-                                <p class="card-text">$10</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 9:ipad -->
-                <div class="col-md-4">
-                    <a href="product.html?product=ipad">
-                        <div class="card">
-                            <img src="istockphoto-1129808327-612x612.jpg" class="card-img-top" alt="ipad">
-                            <div class="card-body">
-                                <h5 class="card-title">ipad</h5>
-                                <p class="card-text">$250</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 10:Pens -->
-                <div class="col-md-4">
-                    <a href="product.html?product=Pens">
-                        <div class="card">
-                            <img src="istockphoto-165981506-612x612.jpg" class="card-img-top" alt="Pens">
-                            <div class="card-body">
-                                <h5 class="card-title">Pens</h5>
-                                <p class="card-text">$5</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 11:Rug -->
-                <div class="col-md-4">
-                    <a href="product.html?product=Rug">
-                        <div class="card">
-                            <img src="istockphoto-1320633607-612x612.jpg" class="card-img-top" alt="Rug">
-                            <div class="card-body">
-                                <h5 class="card-title">Rug</h5>
-                                <p class="card-text">$25</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 12:Curtains -->
-                <div class="col-md-4">
-                    <a href="product.html?product=Curtains">
-                        <div class="card">
-                            <img src="istockphoto-1183928969-612x612.jpg" class="card-img-top" alt="Curtains">
-                            <div class="card-body">
-                                <h5 class="card-title">Curtains</h5>
-                                <p class="card-text">$15</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 13:Jeans -->
-                <div class="col-md-4">
-                    <a href="product.html?product=Jeans">
-                        <div class="card">
-                            <img src="istockphoto-1281304280-612x612.jpg" class="card-img-top" alt="Jeans">
-                            <div class="card-body">
-                                <h5 class="card-title">Jeans</h5>
-                                <p class="card-text">$50</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 14:Jacket -->
-                <div class="col-md-4">
-                    <a href="product.html?product=Jacket">
-                        <div class="card">
-                            <img src="istockphoto-475570206-612x612.jpg" class="card-img-top" alt="Jacket">
-                            <div class="card-body">
-                                <h5 class="card-title">Jacket</h5>
-                                <p class="card-text">$20</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 15:Rackets -->
-                <div class="col-md-4">
-                    <a href="product.html?product=Rackets">
-                        <div class="card">
-                            <img src="istockphoto-1171084311-612x612.jpg" class="card-img-top" alt="Rackets">
-                            <div class="card-body">
-                                <h5 class="card-title">Rackets</h5>
-                                <p class="card-text">$60</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 16:Heels -->
-                <div class="col-md-4">
-                    <a href="product.html?product=Heels">
-                        <div class="card">
-                            <img src="istockphoto-173943143-612x612.jpg" class="card-img-top" alt="Heels ">
-                            <div class="card-body">
-                                <h5 class="card-title">Heels </h5>
-                                <p class="card-text">$25</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 17:Scarf -->
-                <div class="col-md-4">
-                    <a href="product.html?product=Scarf">
-                        <div class="card">
-                            <img src="istockphoto-1314193580-612x612.jpg" class="card-img-top" alt="Scarf">
-                            <div class="card-body">
-                                <h5 class="card-title">Scarf</h5>
-                                <p class="card-text">$3</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 18:Bat -->
-                <div class="col-md-4">
-                    <a href="product.html?product=Bat">
-                        <div class="card">
-                            <img src="istockphoto-176805940-612x612.jpg" class="card-img-top" alt="Bat">
-                            <div class="card-body">
-                                <h5 class="card-title">Bat</h5>
-                                <p class="card-text">$30</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 19:Comforter -->
-                <div class="col-md-4">
-                    <a href="product.html?product=Comforter">
-                        <div class="card">
-                            <img src="istockphoto-536089355-612x612.jpg" class="card-img-top" alt="Comforter">
-                            <div class="card-body">
-                                <h5 class="card-title">Comforter</h5>
-                                <p class="card-text">$10</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- Product 20:Purse -->
-                <div class="col-md-4">
-                    <a href="product.html?product=Purse">
-                        <div class="card">
-                            <img src="istockphoto-952079442-612x612.jpg" class="card-img-top" alt="Purse">
-                            <div class="card-body">
-                                <h5 class="card-title">Purse</h5>
-                                <p class="card-text">$24</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+<div class="container my-5" id="products-container">
+    <!-- Dynamic product cards will be populated here -->
 </div>
 
-<!-- Footer -->
-<footer class="bg-dark text-white p-3 text-center">
+<footer class="bg-dark text-white text-center p-3">
     &copy; 2024 Dormify. All rights reserved.
 </footer>
 
+<script>
+// Function to fetch products from the API and display them
+function fetchProducts() {
+    fetch('http://localhost:5000/api/products')  // Adjust the URL if needed
+        .then(response => response.json())
+        .then(products => {
+            const productsContainer = document.getElementById('products-container');
+            
+            // Clear existing content
+            productsContainer.innerHTML = '';
+
+            // Loop through the products and dynamically create product cards
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('col-md-4', 'mb-4');
+                productCard.innerHTML = `
+                    <div class="card">
+                        <img src="http://localhost:5000/images/${product.image}" class="card-img-top" alt="${product.name}">
+                        <div class="card-body">
+                            <h5 class="card-title">${product.name}</h5>
+                            <p class="card-text">${product.description}</p>
+                            <p class="card-text">Price: ${product.price}</p>
+                            <a href="product-details.html?product=${product.name}" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+        })
+        .catch(error => console.error('Error fetching products:', error));
+}
+
+// Fetch products when the page loads
+window.onload = fetchProducts;
+</script>
+
 </body>
 </html>
-
