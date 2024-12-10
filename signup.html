@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>HTML Sign Up Form</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+    <div class="main">
+        <h1>Dormify</h1>
+        <h3>Create Your Account</h3>
+
+        <form action="index.html" method="GET">
+            <label for="name">
+                Name:
+            </label>
+            <input type="text" id="name" name="name" 
+                placeholder="Your Name" required>
+
+            <label for="email">
+                Email:
+            </label>
+            <input type="email" id="email" name="email" 
+                placeholder="Your Email" required>
+
+            <label for="password">
+                Password:
+            </label>
+            <input type="password" id="password" name="password" 
+                placeholder="Your Password" required>
+
+            <div class="wrap">
+                <button type="submit">
+                    Sign Up
+                </button>
+            </div>
+        </form>
+
+        <p>Already have an account?
+            <a href="login.html" style="text-decoration: none;">
+                Log In
+            </a>
+        </p>
+    </div>
+</body>
+
+</html>
