@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CONTENT | E-COMMERCE WEBSITE</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    <link rel="stylesheet" href="css/profile.css"> <!-- Link to the user profile CSS -->
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <!-- favicon -->
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+
+    <!-- Link to your CSS -->
+    <link rel="stylesheet" href="css/content.css">
+</head>
+<body>
+     <!-- HEADER -->
+     <div id="header"></div>
+     <script>
+         function loadHeader() {
+             const req = new XMLHttpRequest();
+             req.open("GET", "header.html", false);
+             req.send(null);
+             document.getElementById("header").innerHTML = req.responseText;
+         }
+         loadHeader();
+     </script>
+ 
+    <!-- Main Content Container -->
+
+</body>
+
+<!-- Link to your JavaScript -->
+<body>
+
+    <div class="container">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Profile Icon">
+            <div>
+                <h1>Hi, User!</h1>
+                <p>Welcome back to your account</p>
+            </div>
+            <div class="profile-buttons">
+                <a href="indexs.html" class="btn">Buy</a>
+                <a href="sell.html" class="btn">Sell</a>
+            </div>
+        </div>
+
+        <!-- Profile Information Section -->
+        <div class="info-section">
+            <h2>Account Information</h2>
+
+            <div class="info-item">
+                <label for="username">Username:</label>
+                <span id="username">john_doe</span>
+            </div>
+
+            <div class="info-item">
+                <label for="email">Email:</label>
+                <span id="email">john.doe@example.com</span>
+            </div>
+
+            <div class="info-item">
+                <label for="date-joined">Date Joined:</label>
+                <span id="date-joined">January 15, 2022</span>
+            </div>
+
+            <div class="info-item">
+                <label for="status">Account Status:</label>
+                <span id="status">Active</span>
+            </div>
+
+            <div class="info-item">
+                <label for="plan">Subscription Plan:</label>
+                <span id="plan">Premium</span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+    <script>
+        function loadFooter() {
+            const req = new XMLHttpRequest();
+            req.open("GET", "footer.html", false);
+            req.send(null);
+            document.getElementById("footer").innerHTML = req.responseText;
+        }
+        loadFooter();
+    </script>
+      <style>
+        .profile-buttons {
+            display: flex;
+            gap: 200px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            background-color: rgb(255, 30, 30);
+            color: white;
+            padding: 10px 60px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: right;
+        }
+
+        .btn:hover {
+            background-color: rgb(200, 0, 0);
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Sell Your Product</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+
+    <!-- favicon -->
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header, footer {
+            width: 100%;
+            background-color: #ffffff;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            display: block;
+            color: #333;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1em;
+            box-sizing: border-box;
+        }
+
+        input[type="number"], input[type="url"] {
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1em;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .form-group {
+            margin-bottom: -20px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .container p {
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Include Header -->
+    <header>
+        <!-- HEADER -->
+     <div id="header"></div>
+     <script>
+         function loadHeader() {
+             const req = new XMLHttpRequest();
+             req.open("GET", "header.html", false);
+             req.send(null);
+             document.getElementById("header").innerHTML = req.responseText;
+         }
+         loadHeader();
+     </script>
+        <h2>Welcome to Our Product Store</h2>
+        <nav>
+            <a href="/">.</a> | <a href="/products">.</a> | <a href="/contact">.</a>
+        </nav>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Sell Your Product</h1>
+        <form action="/submit-product" method="POST">
+            <div class="form-group">
+                <label for="name">Product Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price ($):</label>
+                <input type="number" id="price" name="price" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Product Description:</label>
+                <textarea id="description" name="description" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="volume">Volume (ml or liters):</label>
+                <input type="number" id="volume" name="volume" required>
+            </div>
+
+            <div class="form-group">
+                <label for="weight">Weight (kg or lbs):</label>
+                <input type="number" id="weight" name="weight" step="0.01" required>
+            </div>
+
+            <div class="form-group">
+                <label for="image_url">Image URL:</label>
+                <input type="url" id="image_url" name="image_url" required>
+            </div>
+
+            <button type="submit">Submit Product</button>
+        </form>
+        <p>Submitting results in a public listing.</p>
+    </div>
+    
+    <!-- Include Footer -->
+    <footer>
+       <!-- FOOTER -->
+    <div id="footer"></div>
+    <script>
+        function loadFooter() {
+            const req = new XMLHttpRequest();
+            req.open("GET", "footer.html", false);
+            req.send(null);
+            document.getElementById("footer").innerHTML = req.responseText;
+        }
+        loadFooter();
+    </script>
+        <p>&copy; 2024 Product Store. All Rights Reserved.</p>
+    </footer>
+    
+</body>
+</html>

@@ -1,0 +1,131 @@
+/* Global reset */
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    background-color: #f4f4f4;
+}
+
+/* Container */
+.container {
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 2px 6px rgba(60, 64, 67, 0.15);
+}
+
+/* Profile Header */
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-header img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.profile-header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.profile-header p {
+    margin: 5px 0;
+    color: #777;
+}
+
+/* Info Section */
+.info-section {
+    margin-top: 30px;
+}
+
+.info-section h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.info-item label {
+    font-weight: bold;
+    color: #333;
+}
+
+.info-item span {
+    color: #555;
+}
+
+/* Header Styles */
+#header {
+    background-color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(60, 64, 67, 0.1);
+}
+
+/* Footer Styles */
+#footer {
+    background-color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 50px;
+    box-shadow: 0 -2px 5px rgba(60, 64, 67, 0.1);
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+    .container {
+        width: 90%;
+    }
+}
+
+@media (max-width: 900px) {
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-header img {
+        margin-bottom: 10px;
+    }
+
+    .info-item {
+        font-size: 14px;
+    }
+
+    .info-section h2 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    .profile-header h1 {
+        font-size: 20px;
+    }
+
+    .profile-header p {
+        font-size: 14px;
+    }
+
+    .info-item {
+        font-size: 13px;
+    }
+
+    .info-section h2 {
+        font-size: 16px;
+    }
+}
+

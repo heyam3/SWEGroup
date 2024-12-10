@@ -1,0 +1,88 @@
+/* Reset body margin */
+body {
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+/* Profile Section */
+#user-profile {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+}
+
+#user-profile .profile-icon {
+    font-size: 50px;
+    margin-right: 15px;
+    color: rgb(29, 29, 29);
+}
+
+#user-profile .greeting {
+    font-size: 24px;
+    color: rgb(29, 29, 29);
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 750px) {
+    #user-profile {
+        padding: 15px;
+    }
+
+    #user-profile .profile-icon {
+        font-size: 40px;
+    }
+
+    #user-profile .greeting {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 550px) {
+    #user-profile .profile-icon {
+        font-size: 35px;
+    }
+
+    #user-profile .greeting {
+        font-size: 18px;
+    }
+}
+
+/* General Style for Page */
+body {
+    background-color: #ffffff;
+    color: #000000;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+#content {
+    flex: 1; /* Ensures footer sticks to the bottom */
+}
+
+#header, #footer {
+    background-color: #f1f1f1;
+    padding: 10px 20px;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+#footer {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Optional: Hover effects for header/footer links */
+#header a, #footer a {
+    text-decoration: none;
+    color: #333;
+}
+
+#header a:hover, #footer a:hover {
+    color: #000;
+}

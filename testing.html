@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+
+    <!-- font links -->
+    <link rel="stylesheet" href="css/profile.css">
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- HEADER -->
+    <div id="header"></div>
+    <script>
+        function loadHeader() {
+            const req = new XMLHttpRequest();
+            req.open("GET", "header.html", false);
+            req.send(null);
+            document.getElementById("header").innerHTML = req.responseText;
+        }
+        loadHeader();
+    </script>
+
+    <!-- CONTENT -->
+    <body>
+
+        <!-- Placeholder for Header to be dynamically loaded -->
+        <div id="header"></div>
+    
+        <div class="container">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <img src="https://www.w3schools.com/w3images/avatar2.png" alt="Profile Icon">
+                <div>
+                    <h1>Hi, User!</h1>
+                    <p>Welcome back to your account</p>
+                </div>
+            </div>
+    
+            <!-- Profile Information Section -->
+            <div class="info-section">
+                <h2>Account Information</h2>
+    
+                <div class="info-item">
+                    <label for="username">Username:</label>
+                    <span id="username">john_doe</span>
+                </div>
+    
+                <div class="info-item">
+                    <label for="email">Email:</label>
+                    <span id="email">john.doe@example.com</span>
+                </div>
+    
+                <div class="info-item">
+                    <label for="date-joined">Date Joined:</label>
+                    <span id="date-joined">January 15, 2022</span>
+                </div>
+    
+                <div class="info-item">
+                    <label for="status">Account Status:</label>
+                    <span id="status">Active</span>
+                </div>
+    
+                <div class="info-item">
+                    <label for="plan">Subscription Plan:</label>
+                    <span id="plan">Premium</span>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+    <script>
+        function loadFooter() {
+            const req = new XMLHttpRequest();
+            req.open("GET", "footer.html", false);
+            req.send(null);
+            document.getElementById("footer").innerHTML = req.responseText;
+        }
+        loadFooter();
+    </script>
+</body>
+</html>
+
