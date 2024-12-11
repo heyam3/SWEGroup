@@ -5,4 +5,9 @@ Dormify is a platform specifically marketed towards college students to buy and 
 
 1. Hasing of the users passwords
 2. Create users
-3. 
+3. Developed backend
+4. Created an accessable UI
+5. Made Database
+6. Successfuly created API's
+
+Clicking on the main page index.html allows you to navigate through the website. Unfortunately, although backend was developed, integration and communication between backend and front end has could not be facilitated despite efforts.
