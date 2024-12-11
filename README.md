@@ -1,7 +1,7 @@
 # SWEGroup
 Dormify is a platform specifically marketed towards college students to buy and sell used items you typically find in a dorm such as appliances, clothing, books, and more. The goal is to create a simple and affordable marketplace for students to easily meet their needs as well as reduce the waste produced by many universities at the end of the term.
 
-#-Pages
+# Pages
     1. Landing page- Home page featuring a small selection of products.
     2. Miscellaneous page- Displays the misc. products sold.
     3. Furniture page- Displays products classified as furniture. 
@@ -12,7 +12,7 @@ Dormify is a platform specifically marketed towards college students to buy and 
     8. Login- for existing users to login
     9. Signup- for new users to make an account 
 
-#-APIS
+ # APIS
     1. Create users- allows user to 
     2. Log in- Allows the user to login 
     3. Get all users- for admin to view active accounts in 
