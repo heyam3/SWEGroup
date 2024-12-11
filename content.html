@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="css/content.css">
 </head>
 <body>
-     <!-- HEADER -->
-     <div id="header"></div>
-     <script>
+    <!-- HEADER -->
+    <div id="header"></div>
+    <script>
          function loadHeader() {
              const req = new XMLHttpRequest();
              req.open("GET", "header.html", false);
@@ -25,43 +25,89 @@
              document.getElementById("header").innerHTML = req.responseText;
          }
          loadHeader();
-     </script>
- 
+    </script>
+
     <!-- Main Content Container -->
     <div id="mainContainer">
         <!-- furniture Section -->
         <h1>Furniture for the Dorm</h1>
         <div id="containerFurniture">
-            <!-- Items will be rendered here dynamically -->
+            <!-- Hardcoded furniture items -->
+            <div class="item">
+                <h3>Sofa</h3>
+                <img src="ProductImages/sofa.jpg" alt="Sofa" />
+                <p>$299.99</p>
+            </div>
+            <div class="item">
+                <h3>Bed Frame</h3>
+                <img src="ProductImages/bedframe.jpg" alt="Bed Frame" />
+                <p>$159.99</p>
+            </div>
+            <div class="item">
+                <h3>Desk</h3>
+                <img src="ProductImages/desk.jpg" alt="Desk" />
+                <p>$89.99</p>
+            </div>
+            <div class="item">
+                <h3>Chair</h3>
+                <img src="ProductImages/chair.png" alt="Chair" />
+                <p>$49.99</p>
+            </div>
+            <div class="item">
+                <h3>Bookshelf</h3>
+                <img src="ProductImages/bookshelf.jpg" alt="Bookshelf" />
+                <p>$129.99</p>
+            </div>
         </div>
 
         <!-- misc Section -->
         <h1>Miscellaneous items</h1>
         <div id="containerMisc">
-            <!-- Items will be rendered here dynamically -->
+            <!-- Hardcoded miscellaneous items -->
+            <div class="item">
+                <h3>Lamp</h3>
+                <img src="ProductImages/lamp.jpg" alt="Lamp" />
+                <p>$39.99</p>
+            </div>
+            <div class="item">
+                <h3>Clock</h3>
+                <img src="ProductImages/clock.jpg" alt="Clock" />
+                <p>$19.99</p>
+            </div>
+            <div class="item">
+                <h3>Rug</h3>
+                <img src="ProductImages/rug.jpg" alt="Rug" />
+                <p>$59.99</p>
+            </div>
+            <div class="item">
+                <h3>Wall Art</h3>
+                <img src="ProductImages/wallart.jpg" alt="Wall Art" />
+                <p>$25.99</p>
+            </div>
+            <div class="item">
+                <h3>Storage Bin</h3>
+                <img src="ProductImages/storagebin.jpg" alt="Storage Bin" />
+                <p>$15.99</p>
+            </div>
         </div>
     </div>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+    <script>
+        function loadFooter() {
+            const req = new XMLHttpRequest();
+            req.open("GET", "footer.html", false);
+            req.send(null);
+            document.getElementById("footer").innerHTML = req.responseText;
+        }
+        loadFooter();
+    </script>
 </body>
 
 <!-- Link to your JavaScript -->
 <script>
-    // Add dynamic content for furniture
-    const furnitureContainer = document.getElementById('containerFurniture');
-    for (let i = 1; i <= 5; i++) {
-        const item = document.createElement('div');
-        item.classList.add('item');
-        item.textContent = `Furniture Item ${i}`;
-        furnitureContainer.appendChild(item);
-    }
-
-    // Add dynamic content for misc
-    const miscContainer = document.getElementById('containerMisc');
-    for (let i = 1; i <= 5; i++) {
-        const item = document.createElement('div');
-        item.classList.add('item');
-        item.textContent = `Misc Item ${i}`;
-        miscContainer.appendChild(item);
-    }
+    // Remove JavaScript for dynamic content generation as we're hardcoding items now
 </script>
 
 <style>
@@ -82,7 +128,7 @@
         margin: 20px 0;
     }
 
-    #containerFuniture, #containerMisc {
+    #containerFurniture, #containerMisc {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
@@ -102,21 +148,16 @@
         transition: transform 0.2s ease;
     }
 
+    .item img {
+        width: 100%;
+        height: 200px;  /* Fixed height for all images */
+        object-fit: cover; /* Ensures images are scaled and cropped properly */
+        border-radius: 4px;
+    }
+
     .item:hover {
         transform: scale(1.05);
     }
 </style>
-<body>
-    <!-- FOOTER -->
-    <div id="footer"></div>
-    <script>
-        function loadFooter() {
-            const req = new XMLHttpRequest();
-            req.open("GET", "footer.html", false);
-            req.send(null);
-            document.getElementById("footer").innerHTML = req.responseText;
-        }
-        loadFooter();
-    </script>
-</body>
+
 </html>
