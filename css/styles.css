@@ -10,7 +10,7 @@ header, footer {
 }
 
 .card img {
-    height: 200px;
+    height: 100px;
     object-fit: cover;
 }
 

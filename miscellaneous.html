@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CONTENT | E-COMMERCE WEBSITE</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    
+    <!-- favicon -->
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+
+    <!-- Link to your CSS -->
+    <link rel="stylesheet" href="css/content.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <div id="header"></div>
+    <script>
+        function loadHeader() {
+            const req = new XMLHttpRequest();
+            req.open("GET", "header.html", false);
+            req.send(null);
+            document.getElementById("header").innerHTML = req.responseText;
+        }
+        loadHeader();
+    </script>
+    <!-- Main Content Container -->
+    <div id="mainContainer">
+        <!-- furniture Section -->
+        <h1>Miscellaneous Items</h1>
+        <div id="containerFurniture">
+            <!-- Items will be rendered here dynamically -->
+        </div>
+    </div>
+</body>
+
+<!-- Link to your JavaScript -->
+<script>
+    // Add dynamic content for furniture
+    const furnitureContainer = document.getElementById('containerFurniture');
+    for (let i = 1; i <= 5; i++) {
+        const item = document.createElement('div');
+        item.classList.add('item');
+        item.textContent = `Furniture Item ${i}`;
+        furnitureContainer.appendChild(item);
+    }
+
+    // Add dynamic content for misc
+    const miscContainer = document.getElementById('containerMisc');
+    for (let i = 1; i <= 5; i++) {
+        const item = document.createElement('div');
+        item.classList.add('item');
+        item.textContent = `Misc Item ${i}`;
+        miscContainer.appendChild(item);
+    }
+</script>
+
+<style>
+    /* Placeholder styling for layout testing */
+    body {
+        font-family: 'Lato', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    #mainContainer {
+        padding: 20px;
+    }
+
+    h1 {
+        color: #333;
+        text-transform: uppercase;
+        margin: 20px 0;
+    }
+
+    #containerFuniture, #containerMisc {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    .item {
+        flex: 1 1 calc(20% - 20px); /* Responsive grid layout */
+        min-width: 150px;
+        background-color: #f4f4f4;
+        text-align: center;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    .item:hover {
+        transform: scale(1.05);
+    }
+</style>
+    <!-- FOOTER -->
+    <div id="footer"></div>
+    <script>
+        function loadFooter() {
+            const req = new XMLHttpRequest();
+            req.open("GET", "footer.html", false);
+            req.send(null);
+            document.getElementById("footer").innerHTML = req.responseText;
+        }
+        loadFooter();
+    </script>
+</html>

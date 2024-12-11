@@ -8,7 +8,17 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
+<!-- HEADER -->
+<div id="header"></div>
+<script>
+    function loadHeader() {
+        const req = new XMLHttpRequest();
+        req.open("GET", "header.html", false);
+        req.send(null);
+        document.getElementById("header").innerHTML = req.responseText;
+    }
+    loadHeader();
+</script>
 <header class="p-3 bg-dark text-white text-center">
     <h1>Order Confirmation</h1>
 </header>
@@ -17,12 +27,19 @@
     <h2>Thank you for your purchase!</h2>
     <p>Your order has been placed successfully. We are processing your order and will notify you once it's ready for shipment.</p>
     <p><strong>Order ID:</strong> <span id="order-id">#123456</span></p>
-    <p><a href="index.html" class="btn btn-primary">Return to Home</a></p>
+    <p><a href="indexs.html" class="btn btn-primary">Return to Home</a></p>
 </div>
 
-<footer class="bg-dark text-white text-center p-3">
-    &copy; 2024 Dormify. All rights reserved.
-</footer>
-
+    <!-- FOOTER -->
+    <div id="footer"></div>
+    <script>
+        function loadFooter() {
+            const req = new XMLHttpRequest();
+            req.open("GET", "footer.html", false);
+            req.send(null);
+            document.getElementById("footer").innerHTML = req.responseText;
+        }
+        loadFooter();
+    </script>
 </body>
 </html>

@@ -109,27 +109,26 @@
     
     <!-- Include Header -->
     <header>
-        <!-- HEADER -->
-     <div id="header"></div>
-     <script>
-         function loadHeader() {
-             const req = new XMLHttpRequest();
-             req.open("GET", "header.html", false);
-             req.send(null);
-             document.getElementById("header").innerHTML = req.responseText;
-         }
-         loadHeader();
-     </script>
+        <div id="header"></div>
+        <script>
+            function loadHeader() {
+                const req = new XMLHttpRequest();
+                req.open("GET", "header.html", false);
+                req.send(null);
+                document.getElementById("header").innerHTML = req.responseText;
+            }
+            loadHeader();
+        </script>
         <h2>Welcome to Our Product Store</h2>
         <nav>
-            <a href="/">.</a> | <a href="/products">.</a> | <a href="/contact">.</a>
+            <a href="/">Home</a> | <a href="/products">Products</a> | <a href="/contact">Contact</a>
         </nav>
     </header>
     
     <!-- Main Content -->
     <div class="container">
         <h1>Sell Your Product</h1>
-        <form action="/submit-product" method="POST">
+        <form action="indexs.html" method="GET">
             <div class="form-group">
                 <label for="name">Product Name:</label>
                 <input type="text" id="name" name="name" required>
@@ -167,17 +166,16 @@
     
     <!-- Include Footer -->
     <footer>
-       <!-- FOOTER -->
-    <div id="footer"></div>
-    <script>
-        function loadFooter() {
-            const req = new XMLHttpRequest();
-            req.open("GET", "footer.html", false);
-            req.send(null);
-            document.getElementById("footer").innerHTML = req.responseText;
-        }
-        loadFooter();
-    </script>
+        <div id="footer"></div>
+        <script>
+            function loadFooter() {
+                const req = new XMLHttpRequest();
+                req.open("GET", "footer.html", false);
+                req.send(null);
+                document.getElementById("footer").innerHTML = req.responseText;
+            }
+            loadFooter();
+        </script>
         <p>&copy; 2024 Product Store. All Rights Reserved.</p>
     </footer>
     

@@ -8,7 +8,17 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
+ <!-- HEADER -->
+ <div id="header"></div>
+ <script>
+     function loadHeader() {
+         const req = new XMLHttpRequest();
+         req.open("GET", "header.html", false);
+         req.send(null);
+         document.getElementById("header").innerHTML = req.responseText;
+     }
+     loadHeader();
+ </script>
 <header class="p-3 bg-dark text-white text-center">
     <h1>Checkout</h1>
 </header>
@@ -71,9 +81,7 @@
     <button class="btn btn-primary mt-4" id="checkout-button">Place Order</button>
 </div>
 
-<footer class="bg-dark text-white text-center p-3">
-    &copy; 2024 Dormify. All rights reserved.
-</footer>
+
 
 <script>
 // Function to update the order summary with cart items
@@ -159,6 +167,16 @@ document.getElementById('checkout-button').addEventListener('click', () => {
 // Initialize the order summary
 updateOrderSummary();
 </script>
-
+    <!-- FOOTER -->
+    <div id="footer"></div>
+    <script>
+        function loadFooter() {
+            const req = new XMLHttpRequest();
+            req.open("GET", "footer.html", false);
+            req.send(null);
+            document.getElementById("footer").innerHTML = req.responseText;
+        }
+        loadFooter();
+    </script>
 </body>
 </html>

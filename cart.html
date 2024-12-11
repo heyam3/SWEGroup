@@ -6,14 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dormify - Cart</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/4a3b1f73a2.js"></script>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="https://yt3.ggpht.com/a/AGF-l78km1YyNXmF0r3-0CycCA0HLA_i6zYn_8NZEg=s900-c-k-c0xffffffff-no-rj-mo" type="image/gif" sizes="16x16">
+
+
 </head>
 <body>
-
+    <div id="header"></div>
+    <script>
+        function loadHeader() {
+            const req = new XMLHttpRequest();
+            req.open("GET", "header.html", false);
+            req.send(null);
+            document.getElementById("header").innerHTML = req.responseText;
+        }
+        loadHeader();
+    </script>
 <header class="p-3 bg-dark text-white text-center">
     <h1>Your Cart</h1>
 </header>
-
+<div id="header"></div>
+<script>
+    function loadHeader() {
+        const req = new XMLHttpRequest();
+        req.open("GET", "header.html", false);
+        req.send(null);
+        document.getElementById("header").innerHTML = req.responseText;
+    }
+    loadHeader();
+</script>
+        <h1>Your Cart</h1>
 <div class="container my-5">
     <table class="table">
         <thead>
@@ -35,9 +59,7 @@
     <button class="btn btn-success mt-3" id="checkout-button" onclick="checkout()">Proceed to Checkout</button>
 </div>
 
-<footer class="bg-dark text-white text-center p-3">
-    &copy; 2024 Dormify. All rights reserved.
-</footer>
+
 
 <script>
 // Function to update the cart display
@@ -148,6 +170,17 @@ function checkout() {
     window.location.href = "checkout.html";
 }
 </script>
+    <!-- FOOTER -->
+    <div id="footer"></div>
+    <script>
+        function loadFooter() {
+            const req = new XMLHttpRequest();
+            req.open("GET", "footer.html", false);
+            req.send(null);
+            document.getElementById("footer").innerHTML = req.responseText;
+        }
+        loadFooter();
+    </script>
 
 </body>
 </html>
