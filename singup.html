@@ -43,6 +43,42 @@
             </a>
         </p>
     </div>
+     <script>
+        document.getElementById('signupForm').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the default form submission
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                const response = await fetch('http://localhost:5000/create_user', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        user: {
+                            username: name,
+                            email: email,
+                            password: password
+                        }
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    alert(result.status); // Show success message
+                    window.location.href = 'indexs.html'; // Redirect on success
+                } else {
+                    alert(result.error || 'Signup failed'); // Show error message
+                }
+            } catch (error) {
+                alert('An error occurred: ' + error.message); // Handle network errors
+            }
+        });
+    </script>
 </body>
 
 </html>
